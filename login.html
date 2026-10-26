@@ -1,0 +1,473 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Smart Expense Tracker</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green: #176b45;
+      --dark-green: #105638;
+      --text: #202b25;
+      --muted: #78847d;
+      --border: #e1e8e3;
+      --bg: #f5f8f5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 430px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 28px;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      background: var(--green);
+      color: white;
+      border-radius: 11px;
+      font-size: 22px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 34px;
+      box-shadow: 0 15px 45px rgba(20, 65, 40, 0.07);
+    }
+
+    .eyebrow {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 28px;
+      margin-bottom: 9px;
+    }
+
+    .intro {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+      background: #f0f4f1;
+      padding: 5px;
+      border-radius: 11px;
+      margin-bottom: 24px;
+    }
+
+    .tab {
+      padding: 11px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .tab.active {
+      background: white;
+      color: var(--green);
+      box-shadow: 0 2px 8px rgba(20, 65, 40, 0.08);
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      height: 48px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0 13px;
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(23, 107, 69, 0.12);
+    }
+
+    .submit {
+      width: 100%;
+      height: 49px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 10px;
+      background: var(--green);
+      color: white;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .submit:hover {
+      background: var(--dark-green);
+    }
+
+    .message {
+      display: none;
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 9px;
+      background: #fff5e8;
+      color: #89521d;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin-top: 22px;
+      color: var(--green);
+      font-size: 13px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .back:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 25px 21px;
+      }
+
+      h1 {
+        font-size: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+
+    <div class="brand">
+      <span class="brand-icon">₹</span>
+      <span>Smart Expense Tracker</span>
+    </div>
+
+    <section class="card">
+      <p class="eyebrow">Your finances, in one place</p>
+
+      <h1 id="heading">Welcome back</h1>
+      <p class="intro" id="intro">
+        Sign in to continue to your expense dashboard.
+      </p>
+
+      <div class="tabs">
+        <button class="tab active" id="loginTab" type="button">
+          Login
+        </button>
+        <button class="tab" id="signupTab" type="button">
+          Create account
+        </button>
+      </div>
+
+      <form id="authForm">
+        <div class="field">
+          <label for="email">Email ID</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+            minlength="6"
+            autocomplete="current-password"
+            required
+          >
+        </div>
+        <p id="forgotPasswordWrap"
+   style="text-align:right; margin: -5px 0 16px;">
+  <a href="#" id="forgotPassword"
+     style="color:#176b45; font-size:13px;
+            font-weight:700; text-decoration:none;">
+    Forgot Password?
+  </a>
+</p>
+
+        <button class="submit" id="submitBtn" type="submit">
+          Login
+        </button>
+
+        <p class="message" id="message" role="status"></p>
+      </form>
+    </section>
+
+    <a href="index.html" class="back">
+      ← Back to home
+    </a>
+
+  </main>
+
+ <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  const SUPABASE_URL = "https://brjezygpsxzbknowalcg.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_4zZjLDRAbCyv-J4VqSDR-A_Gv0x58YQ";
+
+  const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+  const loginTab = document.getElementById("loginTab");
+  const signupTab = document.getElementById("signupTab");
+  const heading = document.getElementById("heading");
+  const intro = document.getElementById("intro");
+  const submitBtn = document.getElementById("submitBtn");
+  const password = document.getElementById("password");
+  const message = document.getElementById("message");
+  const authForm = document.getElementById("authForm");
+  const forgotPassword = document.getElementById("forgotPassword");
+const forgotPasswordWrap = document.getElementById("forgotPasswordWrap");
+const tabs = document.querySelector(".tabs");
+const passwordLabel = document.querySelector('label[for="password"]');
+
+  let mode = "login";
+  supabaseClient.auth.onAuthStateChange((event) => {
+  if (event === "PASSWORD_RECOVERY") {
+    mode = "reset";
+
+    tabs.style.display = "none";
+    forgotPasswordWrap.style.display = "none";
+
+    heading.textContent = "Set a new password";
+    intro.textContent = "Enter your new password below.";
+    passwordLabel.textContent = "New Password";
+    password.placeholder = "Enter your new password";
+    password.autocomplete = "new-password";
+    password.value = "";
+    submitBtn.textContent = "Update Password";
+    message.style.display = "none";
+  }
+});
+
+  function showMessage(text, success = false) {
+    message.textContent = text;
+    message.style.display = "block";
+    message.style.background = success ? "#e8f7ee" : "#fff5e8";
+    message.style.color = success ? "#176b45" : "#89521d";
+  }
+
+  function setMode(newMode) {
+    mode = newMode;
+    const isLogin = mode === "login";
+
+    loginTab.classList.toggle("active", isLogin);
+    signupTab.classList.toggle("active", !isLogin);
+
+    heading.textContent = isLogin
+      ? "Welcome back"
+      : "Create your account";
+
+    intro.textContent = isLogin
+      ? "Sign in to continue to your expense dashboard."
+      : "Create an account to start tracking your expenses.";
+
+    submitBtn.textContent = isLogin ? "Login" : "Create account";
+    password.autocomplete = isLogin
+      ? "current-password"
+      : "new-password";
+
+    message.style.display = "none";
+  }
+
+  loginTab.addEventListener("click", () => setMode("login"));
+  signupTab.addEventListener("click", () => setMode("signup"));
+  forgotPassword.addEventListener("click", async function(event) {
+  event.preventDefault();
+
+  const email = document.getElementById("email").value.trim();
+
+  if (!email) {
+    showMessage("Please enter your registered email ID first.");
+    document.getElementById("email").focus();
+    return;
+  }
+
+  try {
+    forgotPassword.style.pointerEvents = "none";
+
+    const { error } =
+      await supabaseClient.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.origin + window.location.pathname
+      });
+
+    if (error) throw error;
+
+    showMessage(
+      "If the email is registered, a password reset link will be sent. Please check your inbox and spam folder.",
+      true
+    );
+  } catch (error) {
+    showMessage(error.message || "Unable to send the reset email.");
+  } finally {
+    forgotPassword.style.pointerEvents = "auto";
+  }
+});
+
+  authForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const passwordValue = password.value;
+    if (mode === "reset") {
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Updating...";
+
+  try {
+    const { error } = await supabaseClient.auth.updateUser({
+      password: passwordValue
+    });
+
+    if (error) throw error;
+
+    showMessage(
+      "Password updated successfully! You can now log in with your new password.",
+      true
+    );
+
+    password.value = "";
+    mode = "login";
+    tabs.style.display = "grid";
+    heading.textContent = "Welcome back";
+    intro.textContent = "Sign in to continue to your expense dashboard.";
+    passwordLabel.textContent = "Password";
+    password.placeholder = "Enter your password";
+    password.autocomplete = "current-password";
+    submitBtn.textContent = "Login";
+    forgotPasswordWrap.style.display = "block";
+  } catch (error) {
+    showMessage(error.message || "Could not update password.");
+  } finally {
+    submitBtn.disabled = false;
+  }
+
+  return;
+}
+
+    if (
+      SUPABASE_URL.includes("PASTE_") ||
+      SUPABASE_KEY.includes("PASTE_")
+    ) {
+      showMessage("Please add your Supabase Project URL and Publishable Key first.");
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Please wait...";
+    message.style.display = "none";
+
+    try {
+      if (mode === "signup") {
+        const { data, error } = await supabaseClient.auth.signUp({
+          email: email,
+          password: passwordValue
+        });
+
+        if (error) throw error;
+
+        if (data.session) {
+          window.location.href = "app.html";
+        } else {
+          showMessage(
+            "Account created! Please check your email and confirm your account before logging in.",
+            true
+          );
+        }
+      } else {
+        const { error } = await supabaseClient.auth.signInWithPassword({
+          email: email,
+          password: passwordValue
+        });
+
+        if (error) throw error;
+
+        window.location.href = "app.html";
+      }
+    } catch (error) {
+      showMessage(error.message || "Something went wrong. Please try again.");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent =
+        mode === "login" ? "Login" : "Create account";
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tracker | Smart Expense Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="app.css">
+  <script src="common.js"></script>
+</head>
+<body class="app-body">
+
+<nav class="nav" aria-label="Tracker sections">
+  <a class="brand" href="index.html"><span class="brand-mark">&#8377;</span>Expense Tracker</a>
+  <button type="button" class="nav-item" data-view="dashboard">
+    <svg class="icon" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9H4z"/><path d="M10 20v-6h4v6"/></svg><span>Dashboard</span>
+  </button>
+  <button type="button" class="nav-item" data-view="transactions">
+    <svg class="icon" viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg><span>Transactions</span>
+  </button>
+  <button type="button" class="nav-item" data-view="budgets">
+    <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg><span>Budgets</span>
+  </button>
+  <a class="nav-foot" href="index.html">&larr; Back to website</a>
+</nav>
+
+<div class="content">
+  <header class="bar">
+    <h1 id="view-title">Dashboard</h1>
+    <div class="bar-actions">
+      <div class="month" role="group" aria-label="Month">
+        <button type="button" data-action="prev-month" aria-label="Previous month">&#8249;</button>
+        <span id="month-label" aria-live="polite"></span>
+        <button type="button" data-action="next-month" aria-label="Next month">&#8250;</button>
+      </div>
+      <button class="btn" type="button" data-action="add">
+        <svg class="icon" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M12 5v14M5 12h14"/></svg><span class="add-label">Add transaction</span>
+      </button>
+      
+<div class="account-menu">
+  <button type="button" id="profileBtn" class="account-btn">
+    👤 Profile
+  </button>
+
+  <div id="profileDetails" class="profile-details" hidden>
+    <p><strong>My Account</strong></p>
+    <p id="profileEmail">Loading email...</p>
+    <button type="button" id="logoutBtn" class="logout-btn">
+      Logout
+    </button>
+  </div>
+</div>
+
+    </div>
+  </header>
+
+  <div id="notice" class="notice" hidden>
+    <span>Example data is shown.</span>
+    <button type="button" class="btn btn-ghost btn-sm" data-action="clear-sample">Clear examples</button>
+  </div>
+
+  <main id="main"></main>
+</div>
+
+<dialog id="tx-dialog" aria-labelledby="dlg-title">
+  <form id="tx-form" novalidate>
+    <div class="dlg-head">
+      <h2 id="dlg-title">Add transaction</h2>
+      <button type="button" class="icon-btn" data-action="close-dialog" aria-label="Close">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    
+
+
+    <div class="dlg-body">
+      <div class="field">
+        <span class="lab" id="type-lab">Type</span>
+        <div class="seg" role="radiogroup" aria-labelledby="type-lab">
+          <input type="radio" name="type" id="type-expense" value="expense" checked><label for="type-expense">Expense</label>
+          <input type="radio" name="type" id="type-income" value="income"><label for="type-income">Income</label>
+        </div>
+      </div>
+      <div class="two">
+        <div class="field"><label for="f-amount">Amount (&#8377;)</label><input id="f-amount" name="amount" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00"></div>
+        <div class="field"><label for="f-date">Date</label><input id="f-date" name="date" type="date"></div>
+      </div>
+      <div class="field"><label for="f-cat">Category</label><select id="f-cat" name="cat"></select></div>
+      <div class="field"><label for="f-note">Note</label><input id="f-note" name="note" type="text" maxlength="80" placeholder="Optional"></div>
+      <p class="err" id="form-err" role="alert"></p>
+    </div>
+    <div class="dlg-foot">
+      <button type="button" class="btn btn-ghost" data-action="close-dialog">Cancel</button>
+      <button type="submit" class="btn" id="dlg-submit">Add transaction</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="app.js"></script>
+
+<script>
+  const dashboardSupabase = window.supabase.createClient(
+    "https://brjezygpsxzbknowalcg.supabase.co",
+    "sb_publishable_4zZjLDRAbCyv-J4VqSDR-A_Gv0x58YQ"
+  );
+
+  const profileBtn = document.getElementById("profileBtn");
+  const profileDetails = document.getElementById("profileDetails");
+  const profileEmail = document.getElementById("profileEmail");
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  profileBtn.addEventListener("click", () => {
+    profileDetails.hidden = !profileDetails.hidden;
+  });
+
+  async function checkLogin() {
+    const { data, error } = await dashboardSupabase.auth.getUser();
+
+    if (error || !data.user) {
+      window.location.replace("login.html");
+      return;
+    }
+
+    profileEmail.textContent = data.user.email || "Email unavailable";
+  }
+
+  logoutBtn.addEventListener("click", async () => {
+    logoutBtn.disabled = true;
+    logoutBtn.textContent = "Logging out...";
+
+    const { error } = await dashboardSupabase.auth.signOut();
+
+    if (error) {
+      alert("Logout failed. Please try again.");
+      logoutBtn.disabled = false;
+      logoutBtn.textContent = "Logout";
+      return;
+    }
+
+    window.location.replace("login.html");
+  });
+
+  checkLogin();
+</script>
+
+</body>
+</html>

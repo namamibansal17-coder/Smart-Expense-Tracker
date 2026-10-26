@@ -1,0 +1,115 @@
+/* ==========================================================
+   Smart Expense Tracker: shared base styles
+   Colour tokens, type, buttons, forms, pills, light/dark theme
+   ========================================================== */
+:root {
+  --bg: #F3F6F4;
+  --surface: #FFFFFF;
+  --surface-2: #EBF1EE;
+  --ink: #0F1F1A;
+  --muted: #53635C;
+  --line: #DAE3DE;
+  --brand: #0F6B4F;
+  --brand-ink: #FFFFFF;
+  --brand-soft: #DCEFE7;
+  --accent: #F5B300;
+  --accent-soft: #FFE9A8;
+  --income: #0F6B4F;
+  --expense: #C2412B;
+  --ok-soft: #DCEFE7;
+  --warn: #8F5C00;
+  --warn-soft: #FBEBC4;
+  --over-soft: #F8DCD5;
+  --shadow: 0 1px 2px rgba(15, 31, 26, .06), 0 10px 30px rgba(15, 31, 26, .07);
+  --font-display: "Poppins", "Segoe UI", system-ui, sans-serif;
+  --font-sub: "Poppins", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Manrope", "Segoe UI", system-ui, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B1310; --surface: #121C18; --surface-2: #182420; --ink: #E7F0EB; --muted: #94A79E;
+    --line: #243530; --brand: #3DCB98; --brand-ink: #06140E; --brand-soft: #153126;
+    --accent: #F5B82E; --accent-soft: #4A3A08; --income: #3DCB98; --expense: #FF8F78;
+    --ok-soft: #153126; --warn: #F0BE5A; --warn-soft: #33290F; --over-soft: #3A1E19;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 30px rgba(0, 0, 0, .35);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B1310; --surface: #121C18; --surface-2: #182420; --ink: #E7F0EB; --muted: #94A79E;
+  --line: #243530; --brand: #3DCB98; --brand-ink: #06140E; --brand-soft: #153126;
+  --accent: #F5B82E; --accent-soft: #4A3A08; --income: #3DCB98; --expense: #FF8F78;
+  --ok-soft: #153126; --warn: #F0BE5A; --warn-soft: #33290F; --over-soft: #3A1E19;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 30px rgba(0, 0, 0, .35);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; margin: 0; line-height: 1.15; letter-spacing: -0.02em; text-wrap: balance; }
+p { margin: 0; }
+a { color: inherit; }
+img, svg { max-width: 100%; }
+button, input, select, textarea { font: inherit; color: inherit; }
+.num { font-variant-numeric: tabular-nums; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.wrap {
+  max-width: 1120px; margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+.icon { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+/* brand mark */
+.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: 19px; letter-spacing: -0.02em; }
+.brand-mark { width: 34px; height: 34px; border-radius: 10px; background: var(--brand); color: var(--brand-ink); display: grid; place-items: center; font-size: 19px; font-weight: 700; }
+
+/* buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--brand); color: var(--brand-ink); border: 1px solid var(--brand);
+  border-radius: 10px; padding: 10px 18px; font-weight: 700; font-size: 15px; cursor: pointer; text-decoration: none;
+  transition: filter .15s ease, background .15s ease;
+}
+.btn:hover { filter: brightness(1.08); }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn-ghost:hover { background: var(--surface-2); filter: none; }
+.btn-danger { background: var(--expense); border-color: var(--expense); color: #fff; }
+.btn-lg { padding: 14px 24px; font-size: 16px; border-radius: 12px; }
+.btn-sm { padding: 6px 12px; font-size: 13px; border-radius: 8px; }
+.icon-btn { width: 40px; height: 40px; padding: 0; border-radius: 10px; background: transparent; border: 1px solid var(--line); color: var(--ink); cursor: pointer; display: inline-grid; place-items: center; }
+.icon-btn:hover { background: var(--surface-2); }
+
+/* forms */
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.field > label, .field > .lab { font-size: 13px; font-weight: 600; color: var(--muted); }
+.field input, .field select, .field textarea {
+  width: 100%; min-width: 0; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 10px; padding: 11px 12px;
+}
+.field input:focus, .field select:focus { border-color: var(--brand); }
+.seg { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--surface); }
+.seg input { position: absolute; opacity: 0; pointer-events: none; }
+.seg label { text-align: center; padding: 10px; cursor: pointer; font-weight: 700; font-size: 14px; color: var(--muted); }
+.seg input:checked + label { background: var(--brand); color: var(--brand-ink); }
+.seg input:focus-visible + label { outline: 2px solid var(--brand); outline-offset: -2px; }
+.err { color: var(--expense); font-size: 14px; font-weight: 600; }
+
+/* status pills */
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 99px; font-size: 12.5px; font-weight: 700; white-space: nowrap; }
+.pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.pill.ok { background: var(--ok-soft); color: var(--income); }
+.pill.warn { background: var(--warn-soft); color: var(--warn); }
+.pill.over { background: var(--over-soft); color: var(--expense); }
+.pill.none { background: var(--surface-2); color: var(--muted); }
+.in { color: var(--income); }
+.out { color: var(--expense); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }

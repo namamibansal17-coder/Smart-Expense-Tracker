@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Smart Expense Tracker</title>
+  <meta name="description" content="Record income and expenses, set monthly budgets and see where your money goes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="site.css">
+  <script src="common.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Smart Expense Tracker home"><span class="brand-mark">&#8377;</span>Smart Expense Tracker</a>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn" href="login.html">Login</a>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Know where <mark>every rupee</mark> goes.</h1>
+        <p class="lead">Record your income and expenses, set monthly budgets and see what is left.</p>
+        <div class="hero-cta">
+          <a class="btn btn-lg" href="login.html">Login</a>
+        </div>
+      </div>
+
+      <div class="device" role="img" aria-label="Preview of the tracker showing a balance and recent transactions">
+        <div class="device-top"><span>October 2026</span></div>
+        <div class="device-balance num">&#8377;38,420</div>
+        <div class="device-top">Balance this month</div>
+        <div class="device-split">
+          <div><small>Income</small><b class="num in">&#8377;62,000</b></div>
+          <div><small>Expenses</small><b class="num out">&#8377;23,580</b></div>
+        </div>
+        <ul class="mini-list">
+          <li><div>Groceries<span>Food &middot; 14 Oct</span></div><b class="num out">&minus;&#8377;1,240</b></li>
+          <li><div>Freelance project<span>Income &middot; 10 Oct</span></div><b class="num in">+&#8377;8,500</b></li>
+          <li><div>Flat rent<span>Rent &middot; 3 Oct</span></div><b class="num out">&minus;&#8377;15,000</b></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="features">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Simple tools for your money</h2>
+      </div>
+      <div class="feature-grid">
+        <article class="feature">
+          <div class="ico"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg></div>
+          <h3>Track income and expenses</h3>
+          <p>Add an entry with an amount, category and date.</p>
+        </article>
+        <article class="feature">
+          <div class="ico"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></div>
+          <h3>Set monthly budgets</h3>
+          <p>Give each category a limit and see when you are close to it.</p>
+        </article>
+        <article class="feature">
+          <div class="ico"><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
+          <h3>See your spending</h3>
+          <p>Check your balance and where your money went each month.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>How it works</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Add transactions</h3><p>Enter your income and what you spend.</p></li>
+        <li><h3>Set budgets</h3><p>Choose a monthly limit for each category.</p></li>
+        <li><h3>Review your month</h3><p>Open the dashboard to see what is left.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <div class="cta-card">
+        <h2>Start tracking this month</h2>
+        <a class="btn btn-lg" href="login.html">Login</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>&copy; <span id="year">2026</span> Smart Expense Tracker</span>
+  </div>
+</footer>
+
+</body>
+</html>
